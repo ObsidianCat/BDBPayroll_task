@@ -1,7 +1,31 @@
 .container {
   margin: 1.5rem auto; }
 
+section.row.comments .comment-wrap {
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+  padding-top: 1rem; }
+section.row.comments:first-child .comment-wrap {
+  border-top: none; }
+
+.comment-view {
+  position: relative; }
+  .comment-view .glyphicon-comment {
+    position: absolute;
+    top: -20px;
+    right: 0px;
+    font-size: 5rem;
+    opacity: 0.2;
+    color: #449d44; }
+
+.comment-edit {
+  margin-top: 1rem; }
+
 section#add-comment {
-  padding-top: 2rem; }
+  padding-top: 4rem; }
+
+section#tags .checkbox {
+  display: inline-block;
+  margin: 1rem; }
 
 /*# sourceMappingURL=main.css.map */

@@ -15,10 +15,28 @@ angular.module('payrollApp').controller('commentsCtrl', [
                 "tags": ["bug", "issue", "etc"]
             };
         }
+        function createTagsList(commentsData){
+            var tags = new Map;
+            var tagsList = [];
+            for(var i = 0; i<commentsData.length; i++){
+                var currentTags = commentsData[i].tags;
+                for(var j = 0; j<currentTags.length; j++){
+                    if(!tags.has(currentTags[j])){
+                        tags.set(currentTags[j],currentTags[j]);
+                    }
+                }
+            }
+            tags.forEach(function(value){
+                tagsList.push(value);
+
+            });
+            return tagsList;
+        }
 
         DataHandler.getAllComments().then(function(response) {
             $scope.comments = response;
             $scope.newComment = createCommentModel($scope.comments.length);
+            $scope.tagsList = createTagsList($scope.comments);
         });
 
         $scope.addNewComment = function(){

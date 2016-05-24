@@ -3,6 +3,7 @@
  */
 angular.module('payrollApp').directive('addComment', function() {
     return {
+        replace:true,
         templateUrl: "./views/add-comment.html"
     };
 });

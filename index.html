@@ -27,9 +27,19 @@
 </head>
 <body>
     <div class="container" ng-controller="commentsCtrl">
-        <div class="row" ng-repeat="comment in comments track by $index">
+        <section id="tags row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <h4>Tags</h4>
+                <div ng-repeat="tag in tagsList" class="checkbox">
+                    <label >
+                        <input type="checkbox" value="{{tag}}">{{tag}}
+                    </label>
+                </div>
+            </div>
+        </section>
+        <section class="comments row" ng-repeat="comment in comments track by $index">
             <comment-item index="{{$index}}" remove="removeComment(index)" comment="comment"></comment-item>
-        </div>
+        </section>
         <add-comment></add-comment>
     </div>
 </body>
