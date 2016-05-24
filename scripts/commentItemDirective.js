@@ -6,19 +6,22 @@ angular.module('payrollApp').directive('commentItem', function() {
         '$scope',
         function ($scope) {
             $scope.isViewMode = true;
-            $scope.toggleEditMode = function(){
-                $scope.isViewMode = !$scope.isViewMode;
+            $scope.updateCommentData = {
+                title:$scope.comment.title,
+                text:$scope.comment.text
+            };
+            
+            $scope.toggleEditMode = function(isVisible){
+                if($scope.isViewMode != isVisible){
+                    $scope.isViewMode = isVisible;
+                }
+
             };
 
             $scope.updateComment = function(){
-                $scope.comment.title =  $scope.newComment.title;
-                $scope.comment.text =  $scope.newComment.text;
+                $scope.comment.title =  $scope.updateCommentData.title;
+                $scope.comment.text =  $scope.updateCommentData.text;
                 $scope.toggleEditMode();
-            };
-
-            $scope.newComment = {
-                title:$scope.comment.title,
-                text:$scope.comment.text
             };
     }];
 
@@ -26,7 +29,7 @@ angular.module('payrollApp').directive('commentItem', function() {
         replace: true,
         scope: {
             comment: '=',
-            action:'&',
+            remove:'&',
             index:'@'
         },
         controller: controller,
