@@ -27,8 +27,8 @@
 </head>
 <body>
     <div class="container" ng-controller="commentsCtrl">
-        <div class="row" ng-repeat="comment in comments">
-            <comment-item index="{{$index}}" action="removeComment(index)" comment="comment"></comment-item>
+        <div class="row" ng-repeat="comment in comments track by $index">
+            <comment-item index="{{$index}}" remove="removeComment(index)" comment="comment"></comment-item>
         </div>
         <add-comment></add-comment>
     </div>
