@@ -5,14 +5,16 @@ angular.module('payrollApp').directive('commentItem', function() {
     var controller = [
         '$scope',
         '$sce',
-        function ($scope, $sce) {
+        'TagUtils',
+        function ($scope, $sce, TagUtils) {
 
             $scope.comment.text = $sce.trustAsHtml($scope.comment.text);
             $scope.isViewMode = true;
             $scope.updateCommentData = {
                 title:$scope.comment.title,
                 text:$scope.comment.text,
-                allTags:angular.copy($scope.tags),
+                allTags:$scope.tags,
+                newTags:"",
                 tags:angular.copy($scope.comment.tags)
             };
             
@@ -23,20 +25,26 @@ angular.module('payrollApp').directive('commentItem', function() {
             $scope.updateTag = function(index, tag) {
                 var tags = $scope.updateCommentData.tags;
 
-                if (tags.indexOf(tag) > -1) {
-                    tags.splice(index);
-                }
-                else {
-                    tags.push(tag);
-                }
+                TagUtils.updateTags(tag, tags);
+              
             };
+
+          
 
             $scope.updateComment = function(){
                 $scope.comment.title =  $scope.updateCommentData.title;
+                $scope.comment.tags =  $scope.updateCommentData.tags;
+
                 if (typeof $scope.updateCommentData.text === "string") {
                     $scope.updateCommentData.text =   $sce.trustAsHtml($scope.updateCommentData.text);
                 }
                 $scope.comment.text = $scope.updateCommentData.text;
+
+                var newTags = $scope.updateCommentData.newTags.trim();
+                if (newTags) {
+                    TagUtils.addNewTags($scope.tags, $scope.comment.tags, newTags)
+                }
+                $scope.updateCommentData.newTags = "";
                 $scope.toggleEditMode(true);
             };
     }];

@@ -5,14 +5,17 @@ angular.module('payrollApp').controller('commentsCtrl', [
     "$scope",
     "$window",
     "DataHandler",
-    function($scope, $window, DataHandler){
-        $scope.comments;
+    "TagUtils",
+    function($scope, $window, DataHandler, TagUtils){
+        $scope.comments = [];
         function createCommentModel(listLength){
             return {
                 id:listLength+1,
                 title:"",
                 text:"",
-                "tags": ["bug", "issue", "etc"]
+                newTags: "",
+                allTags: $scope.tagsList,
+                tags: []
             };
         }
         function createTagsList(commentsData){
@@ -35,15 +38,28 @@ angular.module('payrollApp').controller('commentsCtrl', [
 
         DataHandler.getAllComments().then(function(response) {
             $scope.comments = response;
-            $scope.newComment = createCommentModel($scope.comments.length);
             $scope.tagsList = createTagsList($scope.comments);
+            $scope.newComment = createCommentModel($scope.comments.length);
+
         });
+
+        $scope.updateTag = function(tag) {
+            var tags = $scope.newComment.tags;
+
+            TagUtils.updateTags(tag, tags);
+        };
 
         $scope.addNewComment = function(){
           if($scope.newComment.title.trim() !="" && $scope.newComment.text.trim() !=""){
+              var newTags = $scope.newComment.newTags.trim();
+              if (newTags) {
+                  TagUtils.addNewTags($scope.newComment.allTags, $scope.newComment.tags, newTags);
+              }
               $scope.comments.push(angular.copy($scope.newComment));
               $scope.newComment.title = "";
               $scope.newComment.text = "";
+              $scope.newComment.newTags = "";
+              $scope.tags = [];
               $scope.newComment.id +=1;
           }
           else{
