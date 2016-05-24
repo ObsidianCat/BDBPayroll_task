@@ -23,7 +23,7 @@ angular.module('payrollApp').controller('commentsCtrl', [
 
         $scope.addNewComment = function(){
           if($scope.newComment.title.trim() !="" && $scope.newComment.text.trim() !=""){
-              $scope.comments.push($scope.newComment);
+              $scope.comments.push(angular.copy($scope.newComment));
               $scope.newComment.title = "";
               $scope.newComment.text = "";
               $scope.newComment.id +=1;
