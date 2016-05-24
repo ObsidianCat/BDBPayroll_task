@@ -11,8 +11,8 @@ angular.module('payrollApp').controller('commentsCtrl', [
             $scope.comments = response;
         });
 
-        $scope.removeComment = function(itemId){
-            $scope.comments.splice(itemId,1);
+        $scope.removeComment = function(index){
+            $scope.comments.splice(index,1);
         };
     }
 ]);

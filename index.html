@@ -14,6 +14,7 @@
     <script src="./scripts/app.js"></script>
     <script src="./scripts/commentsCtrl.js"></script>
     <script src="./scripts/addCommentDirective.js"></script>
+    <script src="./scripts/commentItemDirective.js"></script>
     <script src="./scripts/DataHandlerService.js"></script>
 
     <!--vendors css-->
@@ -27,19 +28,7 @@
 <body>
     <div class="container" ng-controller="commentsCtrl">
         <div class="row" ng-repeat="comment in comments">
-            <div class="comment-wrap col-xs-12 col-md-10">
-                <aside class="actions">
-                    <button type="button" class="btn btn-danger btn-sm" value="Submit" ng-click="removeComment($index)">Delete</button>
-                    <button type="button" class="btn btn-default btn-sm" value="Submit" ng-click="editComment()">Edit</button>
-                </aside>
-                <div class="comment-view">
-                    <h4>{{comment.title}}</h4>
-                    <p>{{comment.text}}</p>
-                </div>
-                <div class="comment-edit">
-
-                </div>
-            </div>
+            <comment-item index="{{$index}}" action="removeComment(index)" comment="comment"></comment-item>
         </div>
         <add-comment></add-comment>
     </div>
