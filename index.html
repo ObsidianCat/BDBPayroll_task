@@ -26,15 +26,16 @@
 </head>
 <body>
     <div class="container" ng-controller="commentsCtrl">
-        <section id="tags row">
+        <section id="tags" class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <h4>Tags</h4>
                 <div ng-repeat="tag in tagsList" class="checkbox">
-                    <label >
+                    <label class="filter label" ng-class="filterTags[tag]?'label-success':'label-default'">
                         <input type="checkbox"
                                ng-model="filterTags[tag]"
                                checked value="{{tag}}"
-                               ng-click="filterByTags()">{{tag}}</label>
+                               ng-click="filterByTags()"
+                               class="checkbox-filter">{{tag}}</label>
                 </div>
             </div>
         </section>

@@ -46,6 +46,8 @@ angular.module('payrollApp').directive('commentItem', function() {
                 }
                 $scope.updateCommentData.newTags = "";
                 $scope.toggleEditMode(true);
+                //crefilter comments
+                $scope.$parent.filterByTags();
             };
     }];
 

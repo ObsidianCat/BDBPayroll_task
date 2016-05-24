@@ -1,6 +1,12 @@
 .container {
   margin: 1.5rem auto; }
 
+div.checkbox {
+  display: inline-block; }
+  div.checkbox label {
+    margin-right: 1rem;
+    display: inline-block; }
+
 section.row.comments .comment-wrap {
   border-top: 1px solid #ccc;
   margin-top: 1rem;
@@ -24,8 +30,11 @@ section.row.comments:first-child .comment-wrap {
 section#add-comment {
   padding-top: 4rem; }
 
-section#tags .checkbox {
-  display: inline-block;
-  margin: 1rem; }
+section#tags div.checkbox:first-child label.filter {
+  margin-left: 0rem;
+  padding-left: 0rem; }
+section#tags label.filter {
+  padding: 0.5rem 1rem 0.5rem 3rem;
+  line-height: 2; }
 
 /*# sourceMappingURL=main.css.map */
