@@ -8,6 +8,7 @@ angular.module('payrollApp').controller('commentsCtrl', [
     "TagUtils",
     function($scope, $window, DataHandler, TagUtils){
         $scope.comments = [];
+        $scope.filterTags ={};
         function createCommentModel(listLength){
             return {
                 id:listLength+1,
@@ -31,6 +32,7 @@ angular.module('payrollApp').controller('commentsCtrl', [
             }
             tags.forEach(function(value){
                 tagsList.push(value);
+                $scope.filterTags[value] = true;
 
             });
             return tagsList;
@@ -38,6 +40,10 @@ angular.module('payrollApp').controller('commentsCtrl', [
 
         DataHandler.getAllComments().then(function(response) {
             $scope.comments = response;
+
+            for (let i = 0; i < $scope.comments.length; i++) {
+                $scope.comments[i].filtered = false;
+            }
             $scope.tagsList = createTagsList($scope.comments);
             $scope.newComment = createCommentModel($scope.comments.length);
 
@@ -69,5 +75,25 @@ angular.module('payrollApp').controller('commentsCtrl', [
         $scope.removeComment = function(index){
             $scope.comments.splice(index,1);
         };
+
+        $scope.filterByTags = function(){
+            for (let i = 0; i < $scope.comments.length; i++) {
+                var comment = $scope.comments[i];
+                var filtered = true;
+                for (let tag in $scope.filterTags) {
+
+                    if (!$scope.filterTags.hasOwnProperty(tag))
+                        continue;
+                    // At least one tag is enough to display
+                    if (comment.tags.indexOf(tag) > -1 && $scope.filterTags[tag]) {
+                        filtered = false;
+                        break;
+                    }
+                }
+
+                comment.filtered = filtered;
+            }
+        };
+
     }
 ]);

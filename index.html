@@ -23,8 +23,6 @@
 
     <!--app css-->
     <link rel="stylesheet" href="./styles/main.css">
-
-
 </head>
 <body>
     <div class="container" ng-controller="commentsCtrl">
@@ -33,16 +31,23 @@
                 <h4>Tags</h4>
                 <div ng-repeat="tag in tagsList" class="checkbox">
                     <label >
-                        <input type="checkbox" value="{{tag}}">{{tag}}
-                    </label>
+                        <input type="checkbox"
+                               ng-model="filterTags[tag]"
+                               checked value="{{tag}}"
+                               ng-click="filterByTags()">{{tag}}</label>
                 </div>
             </div>
         </section>
-        <section class="comments row" ng-repeat="comment in comments track by $index">
-            <comment-item tags="tagsList"
-                          index="{{$index}}"
-                          remove="removeComment(index)"
-                          comment="comment"></comment-item>
+        <section class="comments row"
+
+                 ng-repeat="comment in comments track by $index">
+            <div ng-hide = "comment.filtered">
+            <comment-item
+                    tags="tagsList"
+                    index="{{$index}}"
+                    remove="removeComment(index)"
+                    comment="comment"></comment-item>
+            </div>
         </section>
         <add-comment></add-comment>
     </div>
