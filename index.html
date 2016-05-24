@@ -29,8 +29,8 @@
         <div class="row" ng-repeat="comment in comments">
             <div class="comment-wrap col-xs-12 col-md-10">
                 <aside class="actions">
-                    <button type="button" value="Submit" ng-click="removeComment($index)">Delete</button>
-                    <button type="button" value="Submit" ng-click="editComment()">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" value="Submit" ng-click="removeComment($index)">Delete</button>
+                    <button type="button" class="btn btn-default btn-sm" value="Submit" ng-click="editComment()">Edit</button>
                 </aside>
                 <div class="comment-view">
                     <h4>{{comment.title}}</h4>
@@ -39,8 +39,7 @@
                 <div class="comment-edit">
 
                 </div>
-
-            </aside>
+            </div>
         </div>
         <add-comment></add-comment>
     </div>

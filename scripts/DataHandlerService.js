@@ -4,9 +4,8 @@
 angular.module('payrollApp').factory('DataHandler', [
     "$http",
     "$q",
-    "API_URL",
     "$resource",
-    function($http, $q, API_URL,$resource){
+    function($http, $q,$resource){
         var CommentsRes =  $resource('./data/mock.json/:mock_params');
         var dataMethods = {
             getAllComments: function(){
