@@ -38,7 +38,10 @@
             </div>
         </section>
         <section class="comments row" ng-repeat="comment in comments track by $index">
-            <comment-item index="{{$index}}" remove="removeComment(index)" comment="comment"></comment-item>
+            <comment-item tags="tagsList"
+                          index="{{$index}}"
+                          remove="removeComment(index)"
+                          comment="comment"></comment-item>
         </section>
         <add-comment></add-comment>
     </div>

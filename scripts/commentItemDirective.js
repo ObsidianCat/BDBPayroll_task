@@ -4,24 +4,40 @@
 angular.module('payrollApp').directive('commentItem', function() {
     var controller = [
         '$scope',
-        function ($scope) {
+        '$sce',
+        function ($scope, $sce) {
+
+            $scope.comment.text = $sce.trustAsHtml($scope.comment.text);
             $scope.isViewMode = true;
             $scope.updateCommentData = {
                 title:$scope.comment.title,
-                text:$scope.comment.text
+                text:$scope.comment.text,
+                allTags:angular.copy($scope.tags),
+                tags:angular.copy($scope.comment.tags)
             };
             
-            $scope.toggleEditMode = function(isVisible){
-                if($scope.isViewMode != isVisible){
-                    $scope.isViewMode = isVisible;
-                }
+            $scope.toggleEditMode = function(){
+                $scope.isViewMode = !$scope.isViewMode;
+            };
 
+            $scope.updateTag = function(index, tag) {
+                var tags = $scope.updateCommentData.tags;
+
+                if (tags.indexOf(tag) > -1) {
+                    tags.splice(index);
+                }
+                else {
+                    tags.push(tag);
+                }
             };
 
             $scope.updateComment = function(){
                 $scope.comment.title =  $scope.updateCommentData.title;
-                $scope.comment.text =  $scope.updateCommentData.text;
-                $scope.toggleEditMode();
+                if (typeof $scope.updateCommentData.text === "string") {
+                    $scope.updateCommentData.text =   $sce.trustAsHtml($scope.updateCommentData.text);
+                }
+                $scope.comment.text = $scope.updateCommentData.text;
+                $scope.toggleEditMode(true);
             };
     }];
 
@@ -29,6 +45,7 @@ angular.module('payrollApp').directive('commentItem', function() {
         replace: true,
         scope: {
             comment: '=',
+            tags: '=',
             remove:'&',
             index:'@'
         },
