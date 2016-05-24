@@ -8,10 +8,13 @@
     <!--vendors scripts-->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/angular/angular.min.js"></script>
-    <script src="./node_modules/angular/angular-resource.min.js"></script>
+    <script src="./node_modules/angular-resource/angular-resource.min.js"></script>
 
     <!--app scripts-->
     <script src="./scripts/app.js"></script>
+    <script src="./scripts/commentsCtrl.js"></script>
+    <script src="./scripts/addCommentDirective.js"></script>
+    <script src="./scripts/DataHandlerService.js"></script>
 
     <!--vendors css-->
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -24,6 +27,21 @@
 <body>
     <div class="container" ng-controller="commentsCtrl">
         <div class="row" ng-repeat="comment in comments">
+            <div class="comment-wrap col-xs-12 col-md-10">
+                <aside class="actions">
+                    <button type="button" value="Submit" ng-click="removeComment($index)">Delete</button>
+                    <button type="button" value="Submit" ng-click="editComment()">Edit</button>
+                </aside>
+                <div class="comment-view">
+                    <h4>{{comment.title}}</h4>
+                    <p>{{comment.text}}</p>
+                </div>
+                <div class="comment-edit">
+
+                </div>
+
+            </aside>
+        </div>
         <add-comment></add-comment>
     </div>
 </body>

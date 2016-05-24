@@ -5,6 +5,14 @@ angular.module('payrollApp').controller('commentsCtrl', [
     "$scope",
     "DataHandler",
     function($scope, DataHandler){
+        $scope.test = "hello!";
+        $scope.comments;
+        DataHandler.getAllComments().then(function(response) {
+            $scope.comments = response;
+        });
 
+        $scope.removeComment = function(itemId){
+            $scope.comments.splice(itemId,1);
+        };
     }
 ]);
