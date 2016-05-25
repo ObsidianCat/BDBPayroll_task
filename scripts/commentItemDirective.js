@@ -20,7 +20,7 @@ angular.module('payrollApp').directive('commentItem', function() {
             $scope.toggleEditMode = function(){
                 $scope.isViewMode = !$scope.isViewMode;
             };
-            $scope.updateTag = function(index, tag) {
+            $scope.updateTag = function(tag) {
                 var tags = $scope.updateCommentData.tags;
 
                 TagUtils.updateTags(tag, tags);
