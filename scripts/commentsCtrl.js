@@ -9,6 +9,7 @@ angular.module('payrollApp').controller('commentsCtrl', [
     function($scope, $window, DataHandler, TagUtils){
         $scope.comments = [];
         $scope.filterTags ={};
+
         function createCommentModel(listLength){
             return {
                 id:listLength+1,
@@ -37,24 +38,12 @@ angular.module('payrollApp').controller('commentsCtrl', [
             });
             return tagsList;
         }
-
-        DataHandler.getAllComments().then(function(response) {
-            $scope.comments = response;
-
-            for (let i = 0; i < $scope.comments.length; i++) {
-                $scope.comments[i].filtered = false;
-            }
-            $scope.tagsList = createTagsList($scope.comments);
-            $scope.newComment = createCommentModel($scope.comments.length);
-
-        });
-
+        
         $scope.updateTag = function(tag) {
             var tags = $scope.newComment.tags;
 
             TagUtils.updateTags(tag, tags);
         };
-
         $scope.addNewComment = function(){
           if($scope.newComment.title.trim() !="" && $scope.newComment.text.trim() !=""){
               var newTags = $scope.newComment.newTags.trim();
@@ -75,7 +64,6 @@ angular.module('payrollApp').controller('commentsCtrl', [
         $scope.removeComment = function(index){
             $scope.comments.splice(index,1);
         };
-
         $scope.filterByTags = function(){
             for (let i = 0; i < $scope.comments.length; i++) {
                 var comment = $scope.comments[i];
@@ -90,10 +78,19 @@ angular.module('payrollApp').controller('commentsCtrl', [
                         break;
                     }
                 }
-
                 comment.filtered = filtered;
             }
         };
 
+        DataHandler.getAllComments().then(function(response) {
+            $scope.comments = response;
+
+            for (let i = 0; i < $scope.comments.length; i++) {
+                $scope.comments[i].filtered = false;
+            }
+            $scope.tagsList = createTagsList($scope.comments);
+            $scope.newComment = createCommentModel($scope.comments.length);
+
+        });
     }
 ]);

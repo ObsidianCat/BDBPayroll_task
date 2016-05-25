@@ -17,20 +17,15 @@ angular.module('payrollApp').directive('commentItem', function() {
                 newTags:"",
                 tags:angular.copy($scope.comment.tags)
             };
-            
             $scope.toggleEditMode = function(){
                 $scope.isViewMode = !$scope.isViewMode;
             };
-
             $scope.updateTag = function(index, tag) {
                 var tags = $scope.updateCommentData.tags;
 
                 TagUtils.updateTags(tag, tags);
               
             };
-
-          
-
             $scope.updateComment = function(){
                 $scope.comment.title =  $scope.updateCommentData.title;
                 $scope.comment.tags =  $scope.updateCommentData.tags;
@@ -46,7 +41,7 @@ angular.module('payrollApp').directive('commentItem', function() {
                 }
                 $scope.updateCommentData.newTags = "";
                 $scope.toggleEditMode(true);
-                //crefilter comments
+                //re-filter comments
                 $scope.$parent.filterByTags();
             };
     }];

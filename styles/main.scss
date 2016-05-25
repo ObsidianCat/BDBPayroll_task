@@ -10,20 +10,17 @@ div.checkbox{
   }
 }
 
-
-
 section.row.comments{
   .comment-wrap{
     border-top: 1px solid #ccc;
     margin-top: 1rem;
     padding-top: 1rem;
   }
-
   &:first-child .comment-wrap{
     border-top: none;
   }
-
 }
+
 .comment-view{
   position: relative;
   .glyphicon-comment{
@@ -35,9 +32,11 @@ section.row.comments{
     color: #449d44;
   }
 }
+
 .comment-edit{
   margin-top: 1rem;
 }
+
 section#add-comment{
   padding-top: 4rem;
 }
@@ -49,10 +48,8 @@ section#tags{
       padding-left: 0rem;
     }
   }
-
   label.filter{
     padding: 0.5rem 1rem 0.5rem 3rem;
     line-height: 2;
   }
-
 }

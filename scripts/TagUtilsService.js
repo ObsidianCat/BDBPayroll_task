@@ -8,7 +8,6 @@ angular.module('payrollApp').factory('TagUtils', [
 
             for (let i = 0; i < tags.length; i++) {
                 var tag = tags[i].trim();
-
                 if (tag) {
                     // Global list of tags
                     if ( allTags.indexOf(tag) == -1) {
